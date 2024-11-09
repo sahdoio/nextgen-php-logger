@@ -1,0 +1,10 @@
+services:
+  ng-logger:
+    container_name: ng-logger
+    build:
+      dockerfile: Dockerfile
+    image: ng/logger
+    ports:
+      - '9000:9000'
+    volumes:
+      - ./src:/var/www
