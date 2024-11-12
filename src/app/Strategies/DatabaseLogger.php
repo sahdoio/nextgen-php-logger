@@ -3,11 +3,12 @@
 namespace App\Strategies;
 
 use App\Contracts\LoggerStrategyContract;
+use App\Enums\LogLevel;
 
 class DatabaseLogger implements LoggerStrategyContract
 {
-    public function handle(string $message): void
+    public function handle(string $message, LogLevel $level): void
     {
-        var_dump('Database log: test');
+        echo "[Database] {$level->value}: $message\n";
     }
 }
