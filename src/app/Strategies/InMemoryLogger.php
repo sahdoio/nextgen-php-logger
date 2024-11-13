@@ -5,10 +5,10 @@ namespace App\Strategies;
 use App\Contracts\LoggerStrategyContract;
 use App\Enums\LogLevel;
 
-class DatabaseLogger implements LoggerStrategyContract
+class InMemoryLogger implements LoggerStrategyContract
 {
     public function handle(string $message, LogLevel $level): void
     {
-        echo "[Database] {$level->value}: $message\n";
+        echo "[In Memory] {$level->value}: $message\n";
     }
 }

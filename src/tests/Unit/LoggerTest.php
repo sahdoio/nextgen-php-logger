@@ -3,20 +3,20 @@
 use App\LogProcessor;
 use App\Factories\LoggerFactory;
 use App\Strategies\FileLogger;
-use App\Strategies\DatabaseLogger;
+use App\Strategies\InMemoryLogger;
+use App\Enums\LogLevel;
+use App\Enums\LogType;
 
 test('Should call file log strategy successfully', function () {
-    $type = 'file';
-    $logStrategy = LoggerFactory::create($type);
+    $logStrategy = LoggerFactory::create(Logtype::FILE);
     $sut = new LogProcessor($logStrategy);
-    $sut->exec('message');
+    $sut->exec('message', LogLevel::INFO);
     $this->assertInstanceOf(FileLogger::class, $sut->getStrategy());
 });
 
-test('Should call database strategy successfully', function () {
-    $type = 'database';
-    $logStrategy = LoggerFactory::create($type);
+test('Should call in_memory strategy successfully', function () {
+    $logStrategy = LoggerFactory::create(LogType::IN_MEMORY);
     $sut = new LogProcessor($logStrategy);
-    $sut->exec('message');
-    $this->assertInstanceOf(DatabaseLogger::class, $sut->getStrategy());
+    $sut->exec('message', LogLevel::INFO);
+    $this->assertInstanceOf(InMemoryLogger::class, $sut->getStrategy());
 });

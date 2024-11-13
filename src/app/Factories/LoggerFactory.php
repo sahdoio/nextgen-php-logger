@@ -3,18 +3,17 @@
 namespace App\Factories;
 
 use App\Contracts\LoggerStrategyContract;
-use App\Strategies\DatabaseLogger;
+use App\Enums\LogType;
+use App\Strategies\InMemoryLogger;
 use App\Strategies\FileLogger;
-use InvalidArgumentException;
 
 class LoggerFactory
 {
-    public static function create(string $type): LoggerStrategyContract
+    public static function create(LogType $type): LoggerStrategyContract
     {
         return match ($type) {
-            'file' => new FileLogger(),
-            'database' => new DatabaseLogger(),
-            default => throw new InvalidArgumentException('Invalid logger type'),
+            LogType::FILE => new FileLogger(),
+            LogType::IN_MEMORY => new InMemoryLogger()
         };
     }
 }
