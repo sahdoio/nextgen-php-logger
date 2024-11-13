@@ -9,6 +9,6 @@ class InMemoryLogger implements LoggerStrategyContract
 {
     public function handle(string $message, LogLevel $level): void
     {
-        echo "[In Memory] {$level->value}: $message\n";
+        var_dump("[In Memory] {$level->value}: $message\n");
     }
 }

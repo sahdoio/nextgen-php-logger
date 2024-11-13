@@ -16,6 +16,7 @@ class FileLogger implements LoggerStrategyContract
 
     public function handle(string $message, LogLevel $level): void
     {
+        var_dump("[File] {$level->value}: $message\n");
         $timestamp = date('Y-m-d H:i:s');
         $formattedMessage = "[$timestamp][{$level->value}] $message";
         $fileHandle = fopen($this->logFile, 'a');

@@ -7,7 +7,6 @@ use App\Enums\LogType;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-// Validate arguments
 if ($argc < 3) {
     echo "Usage: php index.php <message> <type>\n";
     exit(1);
