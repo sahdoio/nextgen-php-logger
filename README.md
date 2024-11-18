@@ -33,13 +33,6 @@ $logger->log(level: LogLevel::log, message: 'Message 2', data: ['data5' => 1, 'd
 
 ## Getting Started
 
-### Clone the Repository
-
-```bash
-git clone https://github.com/your-username/php-logger.git
-cd php-logger
-```
-
 ### Build and Start the Project
 
 To start the project, you can use the provided `Makefile` commands:
@@ -49,28 +42,43 @@ To start the project, you can use the provided `Makefile` commands:
   ```bash
   make up
   ```
-
   This will build and start the Docker container, making the PHP logger available.
+  ![img_3.png](img_3.png)
 
 - **Login to the Container**
 
   ```bash
   make sh
   ```
-
   This command lets you access the running container's shell.
+  ![img_2.png](img_2.png)
 
 - **Run the Tests**
-
   ```bash
   make test
   ```
+  ![img_1.png](img_1.png)
+- With coverage
+  ```bash
+  make test-coverage
+  ```
+  ![img.png](img.png)
 
   Executes the test suite using Pest.
 
 ## Running the Logger
 
-Once the container is up, you can use PUT requests to interact with the logger. Customize the logger as needed to handle specific logs within your PHP applications.
+Once the container is up, you can get inside the container and run the logger using the following commands:
+
+```bash
+make sh
+```
+And then:
+```bash
+ php public/index.php "Hello there!" file info
+```
+where the first argument is the message to be logged, the second argument is the strategy to be used (file, in_memory), and the third argument is the log level (info, alert, danger).
+![img_4.png](img_4.png)
 
 ## Running Tests with Pest
 

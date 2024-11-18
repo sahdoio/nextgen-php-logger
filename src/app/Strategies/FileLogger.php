@@ -2,30 +2,31 @@
 
 namespace App\Strategies;
 
+use App\Contracts\FileHandlerContract;
 use App\Contracts\LoggerStrategyContract;
 use App\Enums\LogLevel;
+use Psr\Clock\ClockInterface;
+use RuntimeException;
 
 class FileLogger implements LoggerStrategyContract
 {
-    private string $logFile;
-
-    public function __construct()
+    public function __construct(
+        protected ?string $logFile,
+        protected ClockInterface $clock,
+        protected FileHandlerContract $fileHandler
+    )
     {
-        $this->logFile = __DIR__ . '/../../logs/app.log';
+        $this->logFile = $logFile ?? (ROOT_DIR . '/logs/app.log');
     }
 
+    /**
+     * @throws RuntimeException
+     */
     public function handle(string $message, LogLevel $level): void
     {
-        var_dump("[File] {$level->value}: $message\n");
-        $timestamp = date('Y-m-d H:i:s');
-        $formattedMessage = "[$timestamp][{$level->value}] $message";
-        $fileHandle = fopen($this->logFile, 'a');
-        if ($fileHandle) {
-            fwrite($fileHandle, $formattedMessage . PHP_EOL);
-            fclose($fileHandle);
-            return;
-        }
-        // Handle error if file cannot be opened
-        throw new \RuntimeException('Unable to open log file for writing.');
+        $formattedMessage = "[{$this->clock->now()->format('Y-m-d H:i:s')}][{$level->value}] $message";
+        $this->fileHandler->open($this->logFile, 'a');
+        $this->fileHandler->write($formattedMessage . PHP_EOL);
+        $this->fileHandler->close();
     }
 }

@@ -7,6 +7,8 @@ use App\Enums\LogType;
 
 require __DIR__ . '/../vendor/autoload.php';
 
+define('ROOT_DIR', dirname(__DIR__, 1));
+
 if ($argc < 3) {
     echo "Usage: php index.php <message> <type>\n";
     exit(1);

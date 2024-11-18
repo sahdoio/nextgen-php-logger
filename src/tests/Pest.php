@@ -11,6 +11,8 @@
 |
 */
 
+define('ROOT_DIR', dirname(__DIR__, 1));
+
 // pest()->extend(Tests\TestCase::class)->in('Feature');
 
 /*
