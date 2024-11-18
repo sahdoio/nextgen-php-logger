@@ -2,19 +2,30 @@
 
 namespace App\Factories;
 
+use App\Contracts\FileHandlerContract;
 use App\Contracts\LoggerStrategyContract;
-use App\Strategies\DatabaseLogger;
+use App\Enums\LogType;
+use App\Helpers\Clock;
+use App\Helpers\FileHandler;
+use App\Strategies\InMemoryLogger;
 use App\Strategies\FileLogger;
-use InvalidArgumentException;
+use Psr\Clock\ClockInterface;
 
 class LoggerFactory
 {
-    public static function create(string $type): LoggerStrategyContract
+    public static function create(
+        LogType $type,
+        ?ClockInterface $clock = null,
+        ?FileHandlerContract $fileHandler = null,
+        ?string $resource = null,
+    ): LoggerStrategyContract
     {
+        $myClock = $clock ?? new Clock();
+        $myFileHandler = $fileHandler ?? new FileHandler();
+
         return match ($type) {
-            'file' => new FileLogger(),
-            'database' => new DatabaseLogger(),
-            default => throw new InvalidArgumentException('Invalid logger type'),
+            LogType::FILE => new FileLogger($resource, $myClock, $myFileHandler),
+            LogType::IN_MEMORY => new InMemoryLogger($myClock)
         };
     }
 }

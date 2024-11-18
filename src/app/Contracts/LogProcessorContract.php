@@ -2,8 +2,10 @@
 
 namespace App\Contracts;
 
+use App\Enums\LogLevel;
+
 interface LogProcessorContract
 {
-    function exec(string $message): void;
-    function setStrategy(LoggerStrategyContract $strategy): void;
+    function exec(string $message, LogLevel $level): void;
+    function getStrategy(): LoggerStrategyContract;
 }

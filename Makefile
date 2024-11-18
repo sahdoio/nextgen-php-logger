@@ -16,10 +16,7 @@ logs:
 	$(DC) logs -f --tail=10
 
 test:
-	$(DC) exec ng-logger php vendor/bin/pest
-
-test-coverage:
 	$(DC) exec ng-logger php vendor/bin/pest --coverage
 
-test-coverage-html:
+test-report:
 	$(DC) exec ng-logger php vendor/bin/pest --coverage-html=report
