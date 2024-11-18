@@ -1,6 +1,6 @@
 # PHP Logger Project
 
-This project is a PHP-based logging tool designed to simplify logging in PHP applications. It uses PUT for HTTP logging and Pest for testing.
+This project is a PHP-based logging tool designed to simplify logging in PHP applications.
 
 ## Exercise
 Create a set of classes for logging to files, following the usage below:
