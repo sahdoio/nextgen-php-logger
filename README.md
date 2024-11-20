@@ -43,7 +43,7 @@ To start the project, you can use the provided `Makefile` commands:
   make up
   ```
   This will build and start the Docker container, making the PHP logger available.
-  ![img_3.png](img_3.png)
+  ![img_3.png](docs/img_3.png)
 
 - **Login to the Container**
 
@@ -51,13 +51,13 @@ To start the project, you can use the provided `Makefile` commands:
   make sh
   ```
   This command lets you access the running container's shell.
-  ![img_2.png](img_2.png)
+  ![img_2.png](docs/img_2.png)
 
 - **Run the Tests**
   ```bash
   make test
   ```
-  ![img_1.png](img_1.png)
+  ![img_1.png](docs/img_1.png)
 - With coverage
   ```bash
   make test-coverage
@@ -78,7 +78,7 @@ And then:
  php public/index.php "Hello there!" file info
 ```
 where the first argument is the message to be logged, the second argument is the strategy to be used (file, in_memory), and the third argument is the log level (info, alert, danger).
-![img_4.png](img_4.png)
+![img_4.png](docs/img_4.png)
 
 ## Running Tests with Pest
 
